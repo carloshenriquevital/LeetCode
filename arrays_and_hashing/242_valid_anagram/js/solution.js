@@ -28,13 +28,36 @@
  * @return {boolean}
  */
 var isAnagram = function (s, t) {
-  let charS = [...s];
-  let charT = [...t];
+  const sMap = {};
+  const tMap = {};
 
-  charS.sort();
-  charT.sort();
+  for (let i = 0; i < s.length; i++) {
+    if (sMap[s[i]]) {
+      sMap[s[i]] += 1;
+    } else {
+      sMap[s[i]] = 1;
+    }
+  }
 
-  return charS.join("") === charT.join("");
+  for (let j = 0; j < t.length; j++) {
+    if (tMap[t[j]]) {
+      tMap[t[j]] += 1;
+    } else {
+      tMap[t[j]] = 1;
+    }
+  }
+
+  if (Object.keys(sMap).length !== Object.keys(tMap).length) return false;
+
+  for (const skey in sMap) {
+    if (sMap[skey] !== tMap[skey]) return false;
+  }
+
+  for (const tKey in tMap) {
+    if (sMap[tKey] !== tMap[tKey]) return false;
+  }
+
+  return true;
 };
 
 console.log(isAnagram("anagram", "nagaram"));
