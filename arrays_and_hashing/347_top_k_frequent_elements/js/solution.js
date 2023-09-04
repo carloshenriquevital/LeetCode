@@ -38,6 +38,7 @@ var topKFrequent = function (nums, k) {
       frequencyMap[nums[i]] = 1;
     }
   }
+
   const sortedFrequency = Object.entries(frequencyMap).sort((a, b) => {
     return b[1] - a[1];
   });
